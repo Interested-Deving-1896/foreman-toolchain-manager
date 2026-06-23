@@ -4,13 +4,35 @@
 [![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/foreman-toolchain-manager)
 
 <!-- AI:start:what-it-does -->
-_Description pending._
+This project provides a toolchain manager for Roblox development, enabling streamlined management of simple binary tools required for building and deploying Roblox projects. It is designed for developers working within the Roblox ecosystem, offering features like dependency handling and environment configuration to simplify project workflows.
 <!-- AI:end:what-it-does -->
 
 ## Architecture
 
 <!-- AI:start:architecture -->
-_Architecture documentation pending._
+The project is structured as a Rust workspace with two members: the main `foreman` package and the `artiaa_auth` library. The `foreman` package serves as the primary toolchain manager, while `artiaa_auth` provides authentication functionality. The architecture relies on several dependencies for command execution, logging, HTTP requests, semantic versioning, and configuration parsing. Platform-specific dependencies are included for Windows and Unix systems.
+
+Key components interact as follows:
+- The `foreman` binary orchestrates toolchain management tasks, leveraging libraries like `reqwest` for HTTP operations and `serde` for configuration handling.
+- The `artiaa_auth` library is used for authentication workflows.
+- Cross-platform compatibility is ensured through conditional dependencies and platform-specific logic.
+
+Directory structure:
+```plaintext
+.
+├── .github/             # CI/CD workflows and GitHub-specific files
+├── artiaa_auth/         # Authentication library
+├── resources/           # Static resources
+├── scripts/             # Helper scripts
+├── src/                 # Main source code for the `foreman` binary
+├── tests/               # Integration and unit tests
+├── Cargo.toml           # Workspace and package configuration
+├── Cargo.lock           # Dependency lock file
+├── README.md            # Project documentation
+├── LICENSE.txt          # License information
+├── CHANGELOG.md         # Release notes
+└── foreman.png          # Project logo
+```
 <!-- AI:end:architecture -->
 
 ## Install
@@ -92,7 +114,20 @@ When inside this directory, the `remodel` command will run the latest 0.6.x rele
 ## CI
 
 <!-- AI:start:ci -->
-_CI documentation pending._
+The repository uses GitHub Actions for continuous integration and release workflows. Below are the workflows and their purposes:
+
+- **ci.yml**: Runs on pull requests and pushes to the `main` branch. It performs the following:
+  - Checks Rust code formatting using `cargo fmt`.
+  - Runs Clippy for linting.
+  - Executes tests with `cargo test`.
+  - Builds the project for supported platforms.
+  - No secrets are required.
+
+- **openssl.sh**: A script invoked by workflows to set up OpenSSL dependencies for building the project. It ensures compatibility with the `openssl` crate when the `vendored` feature is enabled. No secrets are required.
+
+- **release.yml**: Triggers on new GitHub releases. It builds release binaries for multiple platforms and uploads them as release assets. Requires the `GITHUB_TOKEN` secret, which is automatically provided by GitHub Actions.
+
+All workflows are located in the `.github/workflows` directory.
 <!-- AI:end:ci -->
 
 ## Mirror chain
@@ -112,7 +147,22 @@ Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-
 ## Contributors
 
 <!-- AI:start:contributors -->
-_Contributors pending._
+[@LPGhatguy](https://github.com/LPGhatguy) - 28 commits  
+[@ZoteTheMighty](https://github.com/ZoteTheMighty) - 19 commits  
+[@afujiwara-roblox](https://github.com/afujiwara-roblox) - 16 commits  
+[@oltrep](https://github.com/oltrep) - 8 commits  
+[@Nicell](https://github.com/Nicell) - 4 commits  
+[@matthargett](https://github.com/matthargett) - 3 commits  
+[@amatosov-rbx](https://github.com/amatosov-rbx) - 2 commits  
+[@JohnnyMorganz](https://github.com/JohnnyMorganz) - 2 commits  
+[@cliffchapmanrbx](https://github.com/cliffchapmanrbx) - 2 commits  
+[@hmallen99](https://github.com/hmallen99) - 1 commit  
+[@Interested-Deving-1896](https://github.com/Interested-Deving-1896) - 1 commit  
+[@OverHash](https://github.com/OverHash) - 1 commit  
+[@demelianov-roblox](https://github.com/demelianov-roblox) - 1 commit  
+[@jeparlefrancais](https://github.com/jeparlefrancais) - 1 commit  
+
+*Note: This repository may be a mirror. Please refer to the upstream source for additional context.*
 <!-- AI:end:contributors -->
 
 ## Origins
